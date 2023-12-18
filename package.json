@@ -1,17 +1,8 @@
 {
-  "name": "faculty-management-system",
-  "version": "1.0.0",
-  "description": "Faculty Management System",
-  "main": "node_login.js",
   "dependencies": {
-    "mysql": "^2.18.1",
-    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.18.2",
+    "mysql": "^2.18.1",
     "mysql2": "^3.6.5"
-  },
-  "scripts": {
-    "start": "node node_login.js",
-    "test": "echo 'No tests defined'"
   }
 }
