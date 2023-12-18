@@ -1,0 +1,102 @@
+/* faculty.css */
+
+/* Resetting default margin and padding */
+/* Resetting default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Your styles with Poppins font-family */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f2f2f2;
+    color: #333;
+    margin: 0;
+}
+
+/* ... Other styles ... */
+
+
+header {
+    background-color: #0d6efd;
+    color: white;
+    padding: 20px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+  }
+  
+  nav ul {
+    list-style: none;
+    text-align: right;
+    padding-right: 20px; /* Added padding to the right */
+}
+
+nav ul li {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+  
+  nav ul li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  nav ul li a:hover {
+    color: #0a58ca;
+  }
+
+main {
+    padding: 50px 20px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif; /* Added font family */
+}
+
+.faculty-member {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    font-family: 'Poppins', sans-serif; /* Added font family */
+}
+
+.faculty-member:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+footer {
+    background-color: #0d6efd;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    font-family: 'Poppins', sans-serif; /* Added font family */
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.faculty-member {
+    animation: fadeInUp 0.5s ease-in-out;
+}
