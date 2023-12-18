@@ -25,6 +25,10 @@ connection.connect((err) => {
   console.log('Connected to database');
 });
 
+app.get('/', (req, res) => {
+  res.send('Welcome to Faculty Management System');
+});
+
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
 
@@ -53,11 +57,6 @@ app.post('/login', (req, res) => {
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-});
-
-
-app.get('/', (req, res) => {
-  res.send('Welcome to Faculty Management System');
 });
 
 
