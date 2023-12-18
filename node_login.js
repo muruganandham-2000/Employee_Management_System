@@ -8,6 +8,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get('/', (req, res, next) => {
+  if (req.method !== 'GET') {
+    next();
+  } else {
+    res.send('Welcome to Faculty Management System');
+  }
+});
+
 app.use(express.static('public'));
 
 const connection = mysql.createConnection({
@@ -23,10 +31,6 @@ connection.connect((err) => {
     return;
   }
   console.log('Connected to database');
-});
-
-app.get('/', (req, res) => {
-  res.send('Welcome to Faculty Management System');
 });
 
 app.post('/login', (req, res) => {
