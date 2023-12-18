@@ -26,21 +26,28 @@ connection.connect((err) => {
 });
 
 app.post('/login', (req, res) => {
-  const { usernameOrEmail, password } = req.body;
+  const { username, password } = req.body;
 
-  const query = 'SELECT * FROM pydatabase.users WHERE (username = ? OR email = ?) AND password = ?';
-  connection.query(query, [usernameOrEmail, usernameOrEmail, password], (error, results) => {
-    if (error) {
-      res.status(500).json({ error: 'Internal server error' });
-      return;
-    }
+  const query = 'SELECT * FROM pydatabase.users WHERE username = ? AND password = ?';
+  
+  try {
+    connection.query(query, [username, password], (error, results) => {
+      if (error) {
+        console.error('Database query error:', error); // Log the database query error
+        res.status(500).json({ error: 'Internal server error' });
+        return;
+      }
 
-    if (results.length > 0) {
-      res.status(200).json({ authenticated: true });
-    } else {
-      res.status(401).json({ authenticated: false });
-    }
-  });
+      if (results.length > 0) {
+        res.status(200).json({ authenticated: true });
+      } else {
+        res.status(401).json({ authenticated: false });
+      }
+    });
+  } catch (err) {
+    console.error('Database query execution error:', err); // Log any error in executing the query
+    res.status(500).json({ error: 'Internal server error' });
+  }
 });
 
 const PORT = 3000;
@@ -52,3 +59,32 @@ app.listen(PORT, () => {
 app.get('/', (req, res) => {
   res.send('Welcome to Faculty Management System');
 });
+
+
+
+// Piece of code requires in future
+
+// app.post('/login', (req, res) => {
+//   const { usernameOrEmail, password } = req.body;
+
+//   const query = 'SELECT * FROM pydatabase.users WHERE (username = ? OR email = ?) AND password = ?';
+  
+//   try {
+//     connection.query(query, [usernameOrEmail, usernameOrEmail, password], (error, results) => {
+//       if (error) {
+//         console.error('Database query error:', error); // Log the database query error
+//         res.status(500).json({ error: 'Internal server error' });
+//         return;
+//       }
+
+//       if (results.length > 0) {
+//         res.status(200).json({ authenticated: true });
+//       } else {
+//         res.status(401).json({ authenticated: false });
+//       }
+//     });
+//   } catch (err) {
+//     console.error('Database query execution error:', err); // Log any error in executing the query
+//     res.status(500).json({ error: 'Internal server error' });
+//   }
+// });
