@@ -8,7 +8,7 @@ This project serves as an MCA final year mini project.
 |-----------------|------------------------------|
 | Muruganandham M | muruganandham5080@gmail.com  | 
 | Ranjith Kumar K | ranjithkannan1799@gmail.com  |
-| Arun Kumaran J  | arunkumaranj18@gmail.com.    |
+| ArunKumaran J  | arunkumaranj18@gmail.com.    |
 ## Features
 - **Employee Information Management:** Detailed profiles, qualifications, and expertise.
 - **Scheduling:** Efficient work scheduling and task allocation among employees.
