@@ -9,7 +9,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ username: usrname, password: psword })
+    body: JSON.stringify({ usernameOrEmail: usrname, password: psword })
   })
   .then(response => {
     if (response.status === 401) {
@@ -18,7 +18,9 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     if (response.ok) {
       return response.json();
     }
+    else{
     throw new Error('Network response was not ok.');
+    }
   })
   .then(data => {
     console.log(data);
