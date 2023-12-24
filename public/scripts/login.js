@@ -9,7 +9,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ usernameOrEmail: usrname, password: psword })
+    body: JSON.stringify({ username_or_email: usrname, password: psword })
   })
   .then(response => {
     if (response.status === 401) {
@@ -18,14 +18,16 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     if (response.ok) {
       return response.json();
     }
-    else{
     throw new Error('Network response was not ok.');
-    }
   })
   .then(data => {
     console.log(data);
     if (data.authenticated) {
-      window.location.href = '/index.html';
+      if (data.isAdmin) {
+        window.location.href = '/admin.html';
+      } else {
+        window.location.href = '/index.html';
+      }
     } else {
       alert('Invalid Username or Password!');
     }

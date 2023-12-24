@@ -5,18 +5,24 @@ document.addEventListener('DOMContentLoaded', function() {
       event.preventDefault();
   
       const fullname = document.getElementById('fullname').value;
-      const email = document.getElementById('email').value;
+      const qualification = document.getElementById('qualification').value;
+      const contact = document.getElementById('contact').value;
       const newusername = document.getElementById('newusername').value;
-      const newpassword = document.getElementById('newpassword').value;
+      const email = document.getElementById('email').value;
+      const newpassword = document.getElementById('newpassword').value; 
+      const role = document.getElementById('role').value;
   
       const formData = {
         fullname: fullname,
-        email: email,
+        qualification: qualification,
+        contact: contact,
         username: newusername,
-        password: newpassword
+        email: email,
+        password: newpassword,
+        role: role
       };
   
-      fetch('/signup', {
+      fetch('/createuser', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
