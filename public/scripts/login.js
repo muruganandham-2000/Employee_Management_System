@@ -24,7 +24,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     console.log(data);
     if (data.authenticated) {
       if (data.isAdmin) {
-        window.location.href = '/sample.html';
+        window.location.href = '/home.html';
       } else {
         window.location.href = '/user.html';
       }
