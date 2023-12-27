@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
         role: role
       };
   
-      fetch('/createuser', {
+      fetch('/create_user', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

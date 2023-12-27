@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('./db');
 
-router.post('/createuser', (req, res) => {
+router.post('/create_user', (req, res) => {
   const { fullname, qualification, contact, username, email, password, role } = req.body;
 
   const checkQuery = 'SELECT COUNT(*) AS countUsernameEmail FROM pydatabase.users WHERE username = ? OR email = ?';
