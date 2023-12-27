@@ -1,7 +1,7 @@
 document.getElementById('loginForm').addEventListener('submit', function(event) {
   event.preventDefault();
   
-  var usrname = document.getElementById('username').value;
+  var usrnameoremail = document.getElementById('usernameOrEmail').value;
   var psword = document.getElementById('password').value;
 
   fetch('/login', {
@@ -9,7 +9,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ username_or_email: usrname, password: psword })
+    body: JSON.stringify({ username_or_email: usrnameoremail, password: psword })
   })
   .then(response => {
     if (response.status === 401) {
@@ -26,7 +26,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
       if (data.isAdmin) {
         window.location.href = '/admin.html';
       } else {
-        window.location.href = '/index.html';
+        window.location.href = '/user.html';
       }
     } else {
       alert('Invalid Username or Password!');
