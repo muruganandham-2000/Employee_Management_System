@@ -66,7 +66,8 @@ document.addEventListener('DOMContentLoaded', function() {
       .then(data => {
         console.log(data);
         alert('User has been created successfully!');
-        window.location.href = 'Create_User.html';
+        //window.location.href = 'Create_User.html';
+        document.getElementById('createUser').reset();
       })
       .catch(error => {
         console.error('There was an error signing up:', error);
