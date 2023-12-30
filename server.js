@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const loginRoutes = require('./node_script/login_routes');
-const userRoutes = require('./node_script/create_user');
+const userRoutes = require('./node_script/user_routes');
 const dashboard = require('./node_script/admin_dashboard');
 
 const app = express();

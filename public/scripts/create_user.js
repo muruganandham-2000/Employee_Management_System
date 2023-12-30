@@ -23,6 +23,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const formData = new FormData();
     const file = fileInput.files[0];
+    if (!file) {
+      alert('Please select a photo to upload.');
+      return;
+    }
     formData.append('photo', file);
   
       const name = document.getElementById('Name').value;
@@ -74,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (error.message === 'Network response was not ok') {
           alert('There was a network issue. Please try again.');
         } else if (error.message === 'User already exists!') {
-          alert('Username or email already exists. Please choose a different one.');
+          alert('User already exists!');
         } else {
           console.error('Unexpected error during signup:', error);
         }
