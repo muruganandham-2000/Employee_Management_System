@@ -183,22 +183,22 @@
                   <div class="card-body">
                     <h4 class="card-title">Creating a User</h4>
                     <p class="card-description">  </p>
-                    <form class="forms-sample">
+                    <form class="forms-sample" id="createUser">
                       <div class="form-group">
                         <label for="exampleInputName1">Name of the Faculty</label>
-                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Name">
+                        <input type="text" class="form-control" id="Name" placeholder="Name">
                       </div>
                       <div class="form-group">
                         <label for="exampleInputEmail3">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
+                        <input type="email" class="form-control" id="Email" placeholder="Email">
                       </div>
                       <div class="form-group">
                         <label for="exampleInputPassword4">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword4" placeholder="Password">
+                        <input type="password" class="form-control" id="Password" placeholder="Password">
                       </div>
                       <div class="form-group">
                         <label for="exampleSelectGender">Gender</label>
-                        <select class="form-control" id="exampleSelectGender">
+                        <select class="form-control" id="Gender">
                           <option>Male</option>
                           <option>Female</option>
                           <option>Transgender</option>
@@ -206,33 +206,33 @@
                       </div>
                       <div class="form-group">
                         <label>Photo upload</label>
-                        <input type="file" name="img[]" class="file-upload-default">
+                        <input type="file" name="img[]" class="file-upload-default" id="photoUpload">
                         <div class="input-group col-xs-12">
                           <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
                           <span class="input-group-append">
-                            <button class="file-upload-browse btn btn-gradient-primary" type="button">Upload</button>
+                            <button class="file-upload-browse btn btn-gradient-primary" type="button" id="uploadButton">Upload</button>
                           </span>
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="exampleInputCity1">Years of Experience</label>
-                        <input type="text" class="form-control" id="exampleInputCity1" placeholder="Location">
+                        <input type="text" class="form-control" id="Experience" placeholder="Experience">
                       </div>
                       <div class="form-group">
                         <label for="exampleInputCity1">Phone Number</label>
-                        <input type="text" class="form-control" id="exampleInputCity1" placeholder="Phone">
+                        <input type="text" class="form-control" id="Phone" placeholder="Phone">
                       </div>
                       <div class="form-group">
                         <label for="exampleInputCity1">Education BackGround</label>
-                        <input type="text" class="form-control" id="exampleInputCity1" placeholder="Degree">
+                        <input type="text" class="form-control" id="Degree" placeholder="Degree">
                       </div>
                       <div class="form-group">
                         <label for="exampleInputCity1">Department</label>
-                        <input type="text" class="form-control" id="exampleInputCity1" placeholder="Specialization">
+                        <input type="text" class="form-control" id="Specialization" placeholder="Specialization">
                       </div>
                       <div class="form-group">
                         <label for="exampleTextarea1">Address</label>
-                        <textarea class="form-control" id="exampleTextarea1" rows="4"></textarea>
+                        <textarea class="form-control" id="Address" rows="4"></textarea>
                       </div>                      
                       <!-- Insert the JS Code -->
                       <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
@@ -262,6 +262,7 @@
     <!-- Plugin js for this page -->
     <!-- End plugin js for this page -->
     <!-- inject:js -->
+    <script src="../../scripts/create_user.js"></script>
     <script src="../../assets/js/off-canvas.js"></script>
     <script src="../../assets/js/hoverable-collapse.js"></script>
     <script src="../../assets/js/misc.js"></script>

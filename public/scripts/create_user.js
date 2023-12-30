@@ -1,33 +1,58 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const signupForm = document.querySelector('.form');
+  const uploadButton = document.getElementById('uploadButton');
+  const fileInput = document.getElementById('photoUpload');
+  const fileUploadInfo = document.querySelector('.file-upload-info');
+
+  uploadButton.addEventListener('click', function() {
+    fileInput.click(); 
+  });
+
+  fileInput.addEventListener('change', function() {
+    if (fileInput.files.length > 0) {
+      const filename = fileInput.files[0].name; 
+      fileUploadInfo.value = filename;
+    } else {
+      fileUploadInfo.value = ''; 
+    }
+  });
+
+  const createUser = document.querySelector('.forms-sample');
+
+  createUser.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const formData = new FormData();
+    const file = fileInput.files[0];
+    formData.append('photo', file);
   
-    signupForm.addEventListener('submit', function(event) {
-      event.preventDefault();
-  
-      const fullname = document.getElementById('fullname').value;
-      const qualification = document.getElementById('qualification').value;
-      const contact = document.getElementById('contact').value;
-      const newusername = document.getElementById('newusername').value;
-      const email = document.getElementById('email').value;
-      const newpassword = document.getElementById('newpassword').value; 
-      const role = document.getElementById('role').value;
-  
-      const formData = {
-        fullname: fullname,
-        qualification: qualification,
-        contact: contact,
-        username: newusername,
-        email: email,
-        password: newpassword,
-        role: role
-      };
+      const name = document.getElementById('Name').value;
+      const email = document.getElementById('Email').value;
+      const password = document.getElementById('Password').value; 
+      const gender = document.getElementById('Gender').value; 
+      const experience = document.getElementById('Experience').value; 
+      const phone = document.getElementById('Phone').value; 
+      const qualification = document.getElementById('Degree').value;
+      const specialization = document.getElementById('Specialization').value; 
+      const address = document.getElementById('Address').value;
+    
+      formData.append('name', name);
+      formData.append('email', email);
+      formData.append('password', password);
+      formData.append('gender', gender);
+      formData.append('experience', experience);
+      formData.append('phone', phone);
+      formData.append('qualification', qualification);
+      formData.append('department', specialization);
+      formData.append('address', address);
+      formData.append('role', 'user');
+      
   
       fetch('/create_user', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
+        // headers: {
+        //   'Content-Type': 'application/json'
+        // },
+        body: formData
       })
       .then(response => {
         if (response.status === 400) {
@@ -40,7 +65,8 @@ document.addEventListener('DOMContentLoaded', function() {
       })
       .then(data => {
         console.log(data);
-        window.location.href = 'login.html';
+        alert('User has been created successfully!');
+        window.location.href = 'Create_User.html';
       })
       .catch(error => {
         console.error('There was an error signing up:', error);
@@ -53,5 +79,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       });
     });
+
+  const cancelButton = document.querySelector('.btn-light');
+  cancelButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    document.getElementById('createUser').reset();
   });
+
+});
   

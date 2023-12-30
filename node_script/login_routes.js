@@ -17,10 +17,10 @@ router.use(session({
 }));
 
 router.post('/login', (req, res) => {
-    const { username_or_email, password } = req.body;
+    const { email, password } = req.body;
 
-    const query = 'SELECT * FROM pydatabase.users WHERE (username = ? OR email = ?) AND password = ?';
-    db.query(query, [username_or_email, username_or_email, password], (error, results) => {
+    const query = 'SELECT * FROM pydatabase.users WHERE email = ? AND password = ?';
+    db.query(query, [email, password], (error, results) => {
         if (error) {
             console.error('Database query error:', error);
             res.status(500).json({ error: 'Internal server error' });

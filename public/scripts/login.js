@@ -1,7 +1,7 @@
 document.getElementById('loginForm').addEventListener('submit', function(event) {
   event.preventDefault();
   
-  var usrnameoremail = document.getElementById('usernameOrEmail').value;
+  var email = document.getElementById('Email').value;
   var psword = document.getElementById('password').value;
 
   fetch('/login', {
@@ -9,7 +9,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ username_or_email: usrnameoremail, password: psword })
+    body: JSON.stringify({ email: email, password: psword })
   })
   .then(response => {
     if (response.status === 401) {
