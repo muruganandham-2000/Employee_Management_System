@@ -5,7 +5,7 @@ const db = require('./db');
 
 const upload = multer({ dest: './uploads/' });
 router.post('/create_user', upload.single('photo'), (req, res) => {
-  if (req.session.user  && req.session.user.role === 'admin') {
+  if (req.session.userRole === 'admin') {
     const { name, email, password, gender, experience, phone, qualification, department, address, role } = req.body;
     //const photoPath = req.file.path;
     const checkQuery = 'SELECT COUNT(*) AS countEmail FROM pydatabase.users WHERE email = ?';

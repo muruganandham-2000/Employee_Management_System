@@ -190,8 +190,8 @@
                     <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                     <h4 class="font-weight-normal mb-3">Available Faculties <i class="mdi mdi-chart-line mdi-24px float-right"></i>
                     </h4>
-                    <h2 class="mb-5">45 Faculties</h2>
-                    <h6 class="card-text">97% Present Today</h6>
+                    <h2 class="mb-5" id="available-faculties"></h2>
+                    <h6 class="card-text" id="present-percentage"></h6>
                   </div>
                 </div>
               </div>
@@ -201,8 +201,8 @@
                     <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                     <h4 class="font-weight-normal mb-3">Leave Requests <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
                     </h4>
-                    <h2 class="mb-5">2 Requests</h2>
-                    <h6 class="card-text">1 Approved</h6>
+                    <h2 class="mb-5" id="leave-requests"></h2>
+                    <h6 class="card-text" id="leave-approved"></h6>
                   </div>
                 </div>
               </div>
@@ -234,52 +234,9 @@
                             <th> Days </th>
                           </tr>
                         </thead>
-                        <tbody>
-                          <tr>
-                            <td>
-                              <img src="assets/images/faces/face1.jpg" class="me-2" alt="image"> MSD
-                            </td>
-                            <td> Health Checkup </td>
-                            <td>
-                              <label class="badge badge-gradient-success">Approved</label>
-                            </td>
-                            <td> Dec 21, 2023 </td>
-                            <td> 2 Days</td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <img src="assets/images/faces/face2.jpg" class="me-2" alt="image"> Smritti Mandanna
-                            </td>
-                            <td> Marriage </td>
-                            <td>
-                              <label class="badge badge-gradient-warning">Progress</label>
-                            </td>
-                            <td> Dec 27, 2023</td>
-                            <td> 15 Days </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <img src="assets/images/faces/face3.jpg" class="me-2" alt="image"> Kohli
-                            </td>
-                            <td> Native </td>
-                            <td>
-                              <label class="badge badge-gradient-info">ON HOLD</label>
-                            </td>
-                            <td> Dec 28, 2023 </td>
-                            <td> 3 Days </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <img src="assets/images/faces/face4.jpg" class="me-2" alt="image"> Rohit Sharma
-                            </td>
-                            <td> Head Ache </td>
-                            <td>
-                              <label class="badge badge-gradient-danger">REJECTED</label>
-                            </td>
-                            <td> Dec 3, 2023 </td>
-                            <td> 2 Days </td>
-                          </tr>
-                        </tbody>
+                        <tbody id="leaveHistoryBody">
+                          <!-- Table rows will be dynamically generated here -->
+                      </tbody>
                       </table>
                     </div>
                   </div>
@@ -379,5 +336,6 @@
     <script src="assets/js/dashboard.js"></script>
     <script src="assets/js/todolist.js"></script>
     <!-- End custom js for this page -->
+    <script src="./scripts/admin.js"></script>
   </body>
 </html>

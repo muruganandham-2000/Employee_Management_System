@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
       formData.append('role', 'user');
       
   
-      fetch('/create_user', {
+      fetch('/admin/create_user', {
         method: 'POST',
         // headers: {
         //   'Content-Type': 'application/json'
