@@ -26,11 +26,11 @@ leaveHistory.forEach(record => {
     const row = document.createElement('tr');
 
     const nameCell = document.createElement('td');
-    //const img = document.createElement('img');
-    //img.src = `assets/images/faces/${record.image}`;
-    //img.classList.add('me-2');
-    //img.alt = 'image';
-    //nameCell.appendChild(img);
+    const img = document.createElement('img');
+    img.src = `../uploads/${record.profile_image}`;
+    img.classList.add('me-2');
+    img.alt = 'image';
+    nameCell.appendChild(img);
     nameCell.appendChild(document.createTextNode(record.name));
     row.appendChild(nameCell);
 

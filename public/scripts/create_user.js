@@ -36,8 +36,10 @@ document.addEventListener('DOMContentLoaded', function() {
       const experience = document.getElementById('Experience').value; 
       const phone = document.getElementById('Phone').value; 
       const qualification = document.getElementById('Degree').value;
-      const specialization = document.getElementById('Specialization').value; 
+      const specialization = document.getElementById('Specialization').value;
+      const position = document.getElementById('Position').value;
       const address = document.getElementById('Address').value;
+      
     
       formData.append('name', name);
       formData.append('email', email);
@@ -47,6 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
       formData.append('phone', phone);
       formData.append('qualification', qualification);
       formData.append('department', specialization);
+      formData.append('position', position);
       formData.append('address', address);
       formData.append('role', 'user');
       
