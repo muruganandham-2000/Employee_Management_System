@@ -11924,6 +11924,15 @@ code {
   background: #3e4b5b;
   color: #ffffff; }
 
+.badge-gradient-text {
+  width: 80px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
 /*Badge gradient variations*/
 .badge-gradient-primary {
   background: -webkit-gradient(linear, left top, right top, from(#da8cff), to(#9a55ff));

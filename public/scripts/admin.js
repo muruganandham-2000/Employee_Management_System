@@ -52,14 +52,7 @@ leaveHistory.forEach(record => {
     } else {
         statusText.classList.add('badge-gradient-Progress');
     }
-
     
-    statusText.style.width = '80px';
-    statusText.style.height = '30px';
-    statusText.style.display = 'flex';
-    statusText.style.alignItems = 'center';
-    statusText.style.justifyContent = 'center';
-
     statusCell.appendChild(statusText);
     row.appendChild(statusCell);
 
