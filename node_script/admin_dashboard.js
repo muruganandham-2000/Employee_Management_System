@@ -104,7 +104,10 @@ router.get('/user_details', async (req, res) => {
 
 router.get('/faculties', async (req, res) => {
   try {
-    const users = await User.find({ role: 'user' }, '-password');
+    const users = await User.find(
+      { role: 'user' },
+      'name department position phone -_id'
+    );
     res.status(200).json(users);
   } catch (error) {
     console.error('Error fetching users:', error);

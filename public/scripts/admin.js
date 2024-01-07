@@ -136,36 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('Error:', error);
       });
   });
-
-//for Analysis
-document.addEventListener('DOMContentLoaded', function() {
-  fetch('/admin/user_details')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      const profileImage = document.getElementById('chartscreenprofile');
-      profileImage.src = `../../uploads/${data.profile_image}`;
-      profileImage.alt = 'profile';
-
-      const adminName = document.querySelector('.nav-profile-text .font-weight-bold');
-      adminName.textContent = data.name;
-
-      const profImage = document.getElementById('profimage');
-      profImage.src = `../../uploads/${data.profile_image}`;
-      profImage.alt = 'image';
-
-      const adminName2 = document.querySelector('.nav-profile-text p');
-      adminName2.textContent = data.name;
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-});
-
+  
 // This is for user activity to show online and offline
 let isOnline = true;
 
