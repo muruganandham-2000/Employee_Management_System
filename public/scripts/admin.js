@@ -61,7 +61,7 @@ leaveHistory.forEach(record => {
     row.appendChild(dateCell);
 
     const daysCell = document.createElement('td');
-    daysCell.textContent = record.days+ ' Days';
+    daysCell.textContent = record.days;
     row.appendChild(daysCell);
 
     tableBody.appendChild(row);
