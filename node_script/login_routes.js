@@ -1,23 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const db = require('./db');
+const User = require('./schemas/user');
 
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
-    const query = 'SELECT role FROM pydatabase.users WHERE email = ? AND password = ?';
-    db.query(query, [email, password], (error, results) => {
-        if (error) {
-            console.error('Database query error:', error);
-            res.status(500).json({ error: 'Internal server error' });
-            return;
-        }
+    try {
+        const user = await User.findOne({ email, password });
 
-        if (results.length > 0) {
-            const { role } = results[0]; // Extracting role from results
-            req.session.userRole = role; // Storing only the role in session
+        if (user) {
+            req.session.userRole = user.role;
             req.session.save();
-            if (role === 'admin') {
+            if (user.role === 'admin') {
                 res.status(200).json({ authenticated: true, isAdmin: true });
             } else {
                 res.status(200).json({ authenticated: true, isAdmin: false });
@@ -25,7 +19,10 @@ router.post('/login', (req, res) => {
         } else {
             res.status(401).json({ authenticated: false });
         }
-    });
+    } catch (error) {
+        console.error('Database query error:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
 });
 
 module.exports = router;

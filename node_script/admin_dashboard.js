@@ -1,66 +1,40 @@
 const express = require('express');
 const router = express.Router();
-const db = require('./db');
-
+const User = require('./schemas/user');
+const Leave = require('./schemas/leave');
 
 let clients = [];
 
 function sendUpdatesToClients() {
-    const AvailableFaculty = "SELECT COUNT(*) AS userCount FROM pydatabase.users WHERE role = 'user'";
-    const LeaveRequest = "SELECT COUNT(*) AS requestCount FROM pydatabase.leave WHERE status = 'Progress'";
-    const LeaveApproved = "SELECT COUNT(*) AS approvedCount FROM pydatabase.leave WHERE status = 'approved'";
-    const LeaveHistory = "SELECT l.name, u.profile_image, l.reason, l.status, l.date, l.days FROM pydatabase.leave l INNER JOIN pydatabase.users u ON l.email = u.email LIMIT 5;";
+    Promise.all([
+        User.countDocuments({ role: 'user' }),
+        Leave.countDocuments({ status: 'Progress' }),
+        Leave.countDocuments({ status: 'approved' }),
+        Leave.find({}).populate('user', 'name profile_image').limit(5).lean()
+    ])
+    .then(([userCount, requestCount, approvedCount, leaveHistory]) => {
+        const percentage = Math.floor(((userCount - approvedCount) / userCount) * 100);
+        const data = {
+            Available_Faculty: `${userCount}`,
+            Leave_Request: `${requestCount}`,
+            Present_Percentage: `${percentage}`,
+            Leave_Approved: `${approvedCount}`,
+            Leave_History: leaveHistory.map(item => ({
+                name: item.user.name,
+                profile_image: item.user.profile_image,
+                reason: item.reason,
+                status: item.status,
+                date: item.date,
+                days: item.days,
+            })),
+        };
 
-    let Available_Faculty = 0;
-    let Leave_Request = 0;
-    let Leave_Approved = 0;
-
-    db.query(AvailableFaculty, (errorUsers, resultFaculties) => {
-        if (errorUsers) {
-            console.error('Error fetching Available Faculty:', errorUsers);
-            return;
-        }
-
-        Available_Faculty = resultFaculties[0].userCount;
-
-        db.query(LeaveRequest, (errorRequest, resultRequest) => {
-            if (errorRequest) {
-                console.error('Error fetching Leave request:', errorRequest);
-                return;
-            }
-                
-            Leave_Request = resultRequest[0].requestCount;
-
-            db.query(LeaveApproved, (errorApproved, resultApproved) => {
-
-                if (errorApproved) {
-                    console.error('Error fetching Leave Approved:', errorApproved);
-                    return;
-                }
-                
-                Leave_Approved = resultApproved[0].approvedCount;
-
-                const percentage = Math.floor(((Available_Faculty - Leave_Approved) / Available_Faculty) * 100);
-                
-                db.query(LeaveHistory, (errorLeave, Leave_History) => {
-                    if (errorLeave) {
-                        console.error('Error fetching leave records:', errorLeave);
-                        res.status(500).json({ error: 'Internal Server Error' });
-                    }
-                    const data = {
-                        Available_Faculty: `${Available_Faculty}`,
-                        Leave_Request: `${Leave_Request}`,
-                        Present_Percentage: `${percentage}`,
-                        Leave_Approved: `${Leave_Approved}`,
-                        Leave_History: Leave_History
-                    };
-
-                    clients.forEach(client => {
-                        client.res.write(`data: ${JSON.stringify(data)}\n\n`);
-                    });
-                });    
-            });
+        clients.forEach(client => {
+            client.res.write(`data: ${JSON.stringify(data)}\n\n`);
         });
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error);
     });
 }
 
