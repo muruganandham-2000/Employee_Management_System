@@ -10,12 +10,16 @@ router.post('/login', async (req, res) => {
 
         if (user) {
             req.session.userRole = user.role;
+            req.session.userName = user.name;
+            req.session.userEmail = user.email;
             req.session.save();
-            if (user.role === 'admin') {
-                res.status(200).json({ authenticated: true, isAdmin: true });
-            } else {
-                res.status(200).json({ authenticated: true, isAdmin: false });
-            }
+
+            const responseData = {
+                authenticated: true,
+                isAdmin: user.role === 'admin'
+            };
+
+            res.status(200).json(responseData);
         } else {
             res.status(401).json({ authenticated: false });
         }
