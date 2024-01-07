@@ -29,64 +29,58 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     formData.append('photo', file);
   
-      const name = document.getElementById('Name').value;
-      const email = document.getElementById('Email').value;
-      const password = document.getElementById('Password').value; 
-      const gender = document.getElementById('Gender').value; 
-      const experience = document.getElementById('Experience').value; 
-      const phone = document.getElementById('Phone').value; 
-      const qualification = document.getElementById('Degree').value;
-      const specialization = document.getElementById('Specialization').value;
-      const position = document.getElementById('Position').value;
-      const address = document.getElementById('Address').value;
-      
+    const name = document.getElementById('Name').value;
+    const email = document.getElementById('Email').value;
+    const password = document.getElementById('Password').value; 
+    const gender = document.getElementById('Gender').value; 
+    const experience = document.getElementById('Experience').value; 
+    const phone = document.getElementById('Phone').value; 
+    const qualification = document.getElementById('Degree').value;
+    const specialization = document.getElementById('Specialization').value;
+    const position = document.getElementById('Position').value;
+    const address = document.getElementById('Address').value;
     
-      formData.append('name', name);
-      formData.append('email', email);
-      formData.append('password', password);
-      formData.append('gender', gender);
-      formData.append('experience', experience);
-      formData.append('phone', phone);
-      formData.append('qualification', qualification);
-      formData.append('department', specialization);
-      formData.append('position', position);
-      formData.append('address', address);
-      formData.append('role', 'user');
-      
-  
-      fetch('/admin/create_user', {
-        method: 'POST',
-        // headers: {
-        //   'Content-Type': 'application/json'
-        // },
-        body: formData
-      })
-      .then(response => {
-        if (response.status === 400) {
-          throw new Error('User already exists!');
-        }
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        console.log(data);
-        alert('User has been created successfully!');
-        //window.location.href = 'Create_User.html';
-        document.getElementById('createUser').reset();
-      })
-      .catch(error => {
-        console.error('There was an error signing up:', error);
-        if (error.message === 'Network response was not ok') {
-          alert('There was a network issue. Please try again.');
-        } else if (error.message === 'User already exists!') {
-          alert('User already exists!');
-        } else {
-          console.error('Unexpected error during signup:', error);
-        }
-      });
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('password', password);
+    formData.append('gender', gender);
+    formData.append('experience', experience);
+    formData.append('phone', phone);
+    formData.append('qualification', qualification);
+    formData.append('department', specialization);
+    formData.append('position', position);
+    formData.append('address', address);
+    formData.append('role', 'user');
+    
+    fetch('/admin/create_user', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => {
+      if (response.status === 400) {
+        throw new Error('User already exists!');
+      }
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log(data);
+      alert('User has been created successfully!');
+      document.getElementById('createUser').reset();
+    })
+    .catch(error => {
+      console.error('There was an error signing up:', error);
+      if (error.message === 'Network response was not ok') {
+        alert('There was a network issue. Please try again.');
+      } else if (error.message === 'User already exists!') {
+        alert('User already exists!');
+      } else {
+        console.error('Unexpected error during signup:', error);
+      }
     });
+  });
 
   const cancelButton = document.querySelector('.btn-light');
   cancelButton.addEventListener('click', function(event) {
@@ -94,5 +88,25 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('createUser').reset();
   });
 
+  // Session expiration check
+  let sessionExpired = false;
+
+  setInterval(function() {
+    if (sessionExpired) {
+      return;
+    }
+
+    fetch('/admin/check_session')
+      .then(response => {
+        if (response.status === 401) {
+          sessionExpired = true;
+          alert('Session has expired. Please log in again.');
+          window.location.href = '/index.html';
+        }
+      })
+      .catch(error => {
+        console.error('Error checking session:', error);
+      });
+  }, 1000);
+
 });
-  

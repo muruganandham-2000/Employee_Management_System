@@ -1,6 +1,6 @@
-document.getElementById('loginForm').addEventListener('submit', function(event) {
+document.getElementById('loginForm').addEventListener('submit', function (event) {
   event.preventDefault();
-  
+
   var email = document.getElementById('Email').value;
   var psword = document.getElementById('password').value;
 
@@ -11,28 +11,28 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     },
     body: JSON.stringify({ email: email, password: psword })
   })
-  .then(response => {
-    if (response.status === 401) {
-      return { authenticated: false };
-    }
-    if (response.ok) {
-      return response.json();
-    }
-    throw new Error('Network response was not ok.');
-  })
-  .then(data => {
-    console.log(data);
-    if (data.authenticated) {
-      if (data.isAdmin) {
-        window.location.href = '/home.html';
-      } else {
-        window.location.href = '/user.html';
+    .then(response => {
+      if (response.status === 401) {
+        return response.json();
       }
-    } else {
-      alert('Invalid Username or Password!');
-    }
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });  
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error('Network response was not ok.');
+    })
+    .then(data => {
+      console.log(data);
+      if (data.authenticated) {
+        if (data.isAdmin) {
+          window.location.href = '/home.html';
+        } else {
+          window.location.href = '/user.html';
+        }
+      } else {
+        alert('Invalid Email Id or Password!');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });  
 });

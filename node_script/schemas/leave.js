@@ -1,4 +1,4 @@
-const mongoose = require('./db');
+const { mongoose } = require('./db');
 
 const leaveSchema = new mongoose.Schema({
   email: {
