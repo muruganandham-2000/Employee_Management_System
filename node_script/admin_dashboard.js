@@ -44,7 +44,7 @@ function sendUpdatesToClients() {
 
       clients.forEach(client => {
         client.res.write(`data: ${JSON.stringify(data)}\n\n`);
-        checkSessionValidity(client); // Check session validity for each client
+        checkSessionValidity(client);
       });
     })
     .catch(error => {
@@ -79,5 +79,37 @@ router.get('/check_session', (req, res) => {
 });
 
 setInterval(sendUpdatesToClients, 5000);
+
+router.get('/user_details', async (req, res) => {
+  try {
+    const userEmail = req.session.userEmail;
+    const user = await User.findOne({ email: userEmail });
+
+    if (user) {
+      const userDetails = {
+        name: user.name,
+        email: user.email,
+        profile_image: user.profile_image
+      };
+      res.status(200).json(userDetails);
+    } else {
+      res.status(404).json({ message: 'User not found' });
+    }
+  } catch (error) {
+    console.error('Error fetching user details:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
+router.get('/faculties', async (req, res) => {
+  try {
+    const users = await User.find({ role: 'user' }, '-password');
+    res.status(200).json(users);
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 module.exports = router;

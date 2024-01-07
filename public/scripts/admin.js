@@ -106,4 +106,104 @@ setInterval(function() {
     .catch(error => {
       console.error('Error checking session:', error);
     });
-}, 1000);
+}, 30000);
+
+//For dashboard
+document.addEventListener('DOMContentLoaded', function() {
+    fetch('/admin/user_details')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        const profileImage1 = document.getElementById('profileImage');
+        profileImage1.src = `./uploads/${data.profile_image}`;
+        profileImage1.alt = 'profile';
+  
+        const adminName1 = document.querySelector('.nav-profile-text .font-weight-bold');
+        adminName1.textContent = data.name;
+  
+        const profileImage2 = document.getElementById('profileImage2');
+        profileImage2.src = `./uploads/${data.profile_image}`;
+        profileImage2.alt = 'image';
+  
+        const adminName2 = document.querySelector('.nav-profile-text p');
+        adminName2.textContent = data.name;
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  });
+
+//for Analysis
+document.addEventListener('DOMContentLoaded', function() {
+  fetch('/admin/user_details')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      const profileImage = document.getElementById('chartscreenprofile');
+      profileImage.src = `../../uploads/${data.profile_image}`;
+      profileImage.alt = 'profile';
+
+      const adminName = document.querySelector('.nav-profile-text .font-weight-bold');
+      adminName.textContent = data.name;
+
+      const profImage = document.getElementById('profimage');
+      profImage.src = `../../uploads/${data.profile_image}`;
+      profImage.alt = 'image';
+
+      const adminName2 = document.querySelector('.nav-profile-text p');
+      adminName2.textContent = data.name;
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+});
+
+// This is for user activity to show online and offline
+let isOnline = true;
+
+const availabilityStatus = document.querySelector('.availability-status');
+
+function setOnlineStatus(status) {
+  availabilityStatus.classList.toggle('online', status);
+  availabilityStatus.classList.toggle('offline', !status);
+}
+
+function setUserOnline() {
+  if (!isOnline) {
+    isOnline = true;
+    setOnlineStatus(true);
+  }
+}
+
+function setUserOffline() {
+  if (isOnline) {
+    isOnline = false;
+    setOnlineStatus(false);
+  }
+}
+
+let activityTimer;
+
+function resetActivityTimer() {
+  clearTimeout(activityTimer);
+  activityTimer = setTimeout(setUserOffline, 5 * 60 * 1000);
+}
+
+
+document.addEventListener('mousemove', function() {
+  setUserOnline();
+  resetActivityTimer();
+});
+
+
+setOnlineStatus(true);
+resetActivityTimer();
+  

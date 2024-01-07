@@ -16,9 +16,7 @@ router.post('/login', async (req, res) => {
 
             const responseData = {
                 authenticated: true,
-                isAdmin: user.role === 'admin',
-                name: user.name,
-                profile_image: user.profile_image
+                isAdmin: user.role === 'admin'
             };
 
             res.status(200).json(responseData);

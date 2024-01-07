@@ -107,6 +107,6 @@ document.addEventListener('DOMContentLoaded', function() {
       .catch(error => {
         console.error('Error checking session:', error);
       });
-  }, 1000);
+  }, 30000);
 
 });
